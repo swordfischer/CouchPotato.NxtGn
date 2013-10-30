@@ -43,31 +43,30 @@ class NxtGn(TorrentProvider):
 				result_table = html.find('table', attrs = {'class' : 'torrents'})
 				if not result_table:
 					return
+				entries = result_table.find_all('tr')
 
-		entries = result_table.find_all('tr')
+				for result in entries[1:]:
 
-		for result in entries[1:]:
+					torrent_id = result.find_all('td')[2].find('a')['id'].replace('details.php?id=', '')
+					torrent_title = result.find_all('td')[1].find('a')['title']
+					torrent_size = self.parseSize(result.find_all('td')[7].contents[0])
+					torrent_seeders = tryInt(result.find_all('td')[8].find('a')['class'])
+					torrent_leechers =  tryInt(result.find_all('td')[9].find('a')['class'])
+					imdb_id = getImdb(result.find_all('td')[1], check_inside = True)
 
-			torrent_id = result.find_all('td')[2].find('a')['id'].replace('details.php?id=', '')
-			torrent_title = result.find_all('td')[1].find('a')['title']
-			torrent_size = self.parseSize(result.find_all('td')[7].contents[0])
-			torrent_seeders = tryInt(result.find_all('td')[8].find('a')['class'])
-			torrent_leechers =  tryInt(result.find_all('td')[9].find('a')['class'])
-			imdb_id = getImdb(result.find_all('td')[1], check_inside = True)
+					results.append({
+						'id': torrent_id,
+						'name': torrent_title,
+						'url': self.urls['download'] % torrent_id,
+						'detail_url': self.urls['detail'] % torrent_id,
+						'size': torrent_size,
+						'seeders': torrent_seeders if torrent_seeders else 0,
+						'leechers': torrent_leechers if torrent_leechers else 0,
+						'description': imdb_id if imdb_id else '',
+					})
 
-			results.append({
-				'id': torrent_id,
-				'name': torrent_title,
-				'url': self.urls['download'] % torrent_id,
-				'detail_url': self.urls['detail'] % torrent_id,
-				'size': torrent_size,
-				'seeders': torrent_seeders if torrent_seeders else 0,
-				'leechers': torrent_leechers if torrent_leechers else 0,
-				'description': imdb_id if imdb_id else '',
-			})
-
-		except:
-			log.error('Failed getting results from %s: %s', (self.getName(), traceback.format_exc()))
+			except:
+				log.error('Failed getting results from %s: %s', (self.getName(), traceback.format_exc()))
 
 
 	def getLoginParams(self):

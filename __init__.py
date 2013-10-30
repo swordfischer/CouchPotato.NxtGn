@@ -4,11 +4,10 @@ def start():
     return NxtGn()
 
 config = [{
-    'name': 'nextgen',
+    'name': 'nxtgn',
     'groups': [
         {
             'tab': 'searcher',
-            'subtab': 'providers',
             'list': 'torrent_providers',
             'name': 'NxtGn',
             'description': 'See <a href="http://nxtgn.org">NxtGn</a>',
