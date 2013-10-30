@@ -5,7 +5,6 @@ from couchpotato.core.logger import CPLog
 from couchpotato.core.providers.torrent.base import TorrentProvider
 import traceback
 
-
 log = CPLog(__name__)
 
 
