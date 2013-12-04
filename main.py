@@ -21,32 +21,32 @@ class NxtGn(TorrentProvider):
 	urls = {
 		'test' : 'http://nxtgn.org/',
 		'login' : 'http://nxtgn.org/takelogin.php?csrf=',
-                'login_page' : 'http://nxtgn.org/login.php',
+		'login_page' : 'http://nxtgn.org/login.php',
 		'detail' : 'http://nxtgn.org/details.php?id=%s',
 		'search' : 'http://nxtgn.org/browse.php?search=%s&cat=%d',
 		'download' : 'http://nxtgn.org/download.php?id=%s',
 	}
-
+	
 	cat_ids = [
 		([9], ['720p', '1080p']),
 		([38], ['720p', '1080p']),
-                ([17], ['dvdr']),
-                ([6], ['dvdr']),
-                ([25], ['dvdr']),
-                ([28], ['dvdr']),
-                ([5], ['cam', 'ts', 'dvdrip', 'tc', 'r5', 'scr', 'brrip']),
+		([17], ['dvdr']),
+		([6], ['dvdr']),
+		([25], ['dvdr']),
+		([28], ['dvdr']),
+		([5], ['cam', 'ts', 'dvdrip', 'tc', 'r5', 'scr', 'brrip']),
 	]
-
+	
 	http_time_between_calls = 1 #seconds
 	cat_backup_id = None
-        login_opener = None
-        last_login_check = 0
-
+	login_opener = None
+	last_login_check = 0
+	
 	def _searchOnTitle(self, title, movie, quality, results):
-
+	
 		url = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['library']['year'])), self.getCatId(quality['identifier'])[0])
 		data = self.getHTMLData(url, opener = self.login_opener)
-
+		
 		if data:
 			html = BeautifulSoup(data)
 			try:
@@ -54,26 +54,26 @@ class NxtGn(TorrentProvider):
 				if not result_table:
 					return
 				entries = result_table.find_all('tr')
-
+				
 				for result in entries[1:]:
 					torrent_id = result.find_all('td')[3].find('a')['href'].replace('download.php?id=', '')
 					torrent_title = result.find_all('td')[1].find('a')['title']
-
+					
 					torrent_title = torrent_title.replace('EXTENDED.CUT.','')
-                                        torrent_title = torrent_title.replace('UNRATED.CUT.','')
-                                        torrent_title = torrent_title.replace('THEATRICAL.CUT.','')
+					torrent_title = torrent_title.replace('UNRATED.CUT.','')
+					torrent_title = torrent_title.replace('THEATRICAL.CUT.','')
 					torrent_title = torrent_title.replace('EXTENDED.','')
-                                        torrent_title = torrent_title.replace('UNRATED.','')
-                                        torrent_title = torrent_title.replace('THEATRICAL.','')
-                                        torrent_title = torrent_title.replace('Extended.Cut.','')
-                                        torrent_title = torrent_title.replace('Unrated.Cut.','')
-                                        torrent_title = torrent_title.replace('Theatrical.Cut.','')
-                                        torrent_title = torrent_title.replace('Extended.','')
-                                        torrent_title = torrent_title.replace('Unrated.','')
-                                        torrent_title = torrent_title.replace('Theatrical.','')
-
+					torrent_title = torrent_title.replace('UNRATED.','')
+					torrent_title = torrent_title.replace('THEATRICAL.','')
+					torrent_title = torrent_title.replace('Extended.Cut.','')
+					torrent_title = torrent_title.replace('Unrated.Cut.','')
+					torrent_title = torrent_title.replace('Theatrical.Cut.','')
+					torrent_title = torrent_title.replace('Extended.','')
+					torrent_title = torrent_title.replace('Unrated.','')
+					torrent_title = torrent_title.replace('Theatrical.','')
+					
 					torrent_size = self.parseSize(result.find_all('td')[8].contents[0])
-
+					
 					results.append({
 						'id': torrent_id,
 						'name': torrent_title,
@@ -81,15 +81,15 @@ class NxtGn(TorrentProvider):
 						'detail_url': self.urls['detail'] % torrent_id,
 						'size': torrent_size,
 					})
-
+			
 			except:
 				log.error('Failed getting results from %s: %s', (self.getName(), traceback.format_exc()))
-
-        def getLoginParams(self):
-                return tryUrlencode({
-                        'username': self.conf('username'),
-                        'password': self.conf('password'),
-                })
+				
+	def getLoginParams(self):
+		return tryUrlencode({
+			'username': self.conf('username'),
+			'password': self.conf('password'),
+		})
 
 	def login(self):
 	
