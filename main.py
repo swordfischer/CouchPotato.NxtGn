@@ -13,7 +13,7 @@ import time
 log = CPLog(__name__)
 
 
-class NextGen(TorrentProvider):
+class NxtGn(TorrentProvider):
 
 	urls = {
 		'test' : 'https://nxtgn.org/',
