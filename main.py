@@ -18,12 +18,12 @@ class NextGen(TorrentProvider):
         'login_page' : 'https://nxtgn.org/login.php',
         'login' : 'https://nxtgn.org/takelogin.php',
         'detail' : 'https://nxtgn.org/details.php?id=%s',
-        'search' : 'https://nxtgn.org/browse.php?search=%s&cat=0&incldead=0&modes=&c47=1&c17=1&c6=1&c16=1&c9=1&c12=1&c25=1&c38=1&c22=1&c28=1&c43=1&c33=1',
+        'search' : 'http://nxtgn.org/browse.php?search=%s&cat=%d',
         'download' : 'https://nxtgn.org/download.php?id=%s',
     }
     
     cat_ids = [
-       ([9], ['720p', '1080p']),
+        ([9], ['720p', '1080p']),
         ([38], ['720p', '1080p']),
         ([33], ['720p', '1080p']),
         ([43], ['720p', '1080p']),
