@@ -44,7 +44,7 @@ class NxtGn(TorrentProvider):
 
 	def _searchOnTitle(self, title, movie, quality, results):
 
-		searchurl = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['library']['year'])))
+		searchurl = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['library']['year'])), self.getCatId(quality['identifier'])[0])
 		data = self.getHTMLData(searchurl, opener = self.login_opener)
 		
 		
