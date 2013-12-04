@@ -1,4 +1,4 @@
-NxtGn CouchPotato Provider (pre-alpha)
+NxtGn CouchPotato Provider
 ======================
 
 <h3>How-to install</h3>
