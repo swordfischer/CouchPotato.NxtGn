@@ -28,6 +28,20 @@ config = [{
 					'type': 'password',
 				},
 				{
+					'name': 'seed_ratio',
+					'label': 'Seed ratio',
+					'type': 'float',
+					'default': 1,
+					'description': 'Will not be (re)moved until this seed ratio is met.',
+				},
+				{
+					'name': 'seed_time',
+					'label': 'Seed time',
+					'type': 'int',
+					'default': 48,
+					'description': 'Will not be (re)moved until this seed time (in hours) is met.',
+				},
+				{
 					'name': 'extra_score',
 					'advanced': True,
 					'label': 'Extra Score',
@@ -39,3 +53,4 @@ config = [{
 		},
 	],
 }]
+
