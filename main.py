@@ -1,3 +1,5 @@
+# credits goes to https://github.com/TjaLfE/cps.nextgen
+
 from bs4 import BeautifulSoup
 from couchpotato.core.helpers.encoding import simplifyString, tryUrlencode
 from couchpotato.core.helpers.variable import tryInt
