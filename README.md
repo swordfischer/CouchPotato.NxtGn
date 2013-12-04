@@ -8,5 +8,7 @@ Make a folder named nxtgn at /couchpotato/core/providers/torrent/ and place the 
 Once installed as above, go about activating the provider as you would with any other provider in CouchPotato.
 
 <h3>Thanks to</h3>
-<a href="https://github.com/Xirg">Xirg</a>
-<a href="https://github.com/TjaLfE">TjaLfe</a>
+<ul>
+  <li><a href="https://github.com/Xirg">Xirg</a></li>
+  <li><a href="https://github.com/TjaLfE">TjaLfe</a></li>
+</ul>
