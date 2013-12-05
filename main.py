@@ -25,18 +25,11 @@ class NxtGn(TorrentProvider):
 	}
 	
 	cat_ids = [
-		([9], ['720p', '1080p']),
-		([38], ['720p', '1080p']),
-		([33], ['720p', '1080p']),
-		([43], ['720p', '1080p']),
-		([47], ['1080p']),
-		([17], ['dvdr']),
-		([16], ['dvdr']),
-		([6], ['dvdr']),
-		([25], ['dvdr']),
-		([28], ['dvdr']),
+		([9, 33, 38, 43, 47], ['720p', '1080p']),
+		([6, 16, 17, 25, 28], ['dvdr']),
 		([5], ['cam', 'ts', 'dvdrip', 'tc', 'r5', 'scr', 'brrip']),
 	]
+
 
 	http_time_between_calls = 1 #seconds
 
@@ -44,7 +37,12 @@ class NxtGn(TorrentProvider):
 
 	def _searchOnTitle(self, title, movie, quality, results):
 
-		searchurl = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['library']['year'])), self.getCatId(quality['identifier'])[0])
+		#correct category search
+		categories= ""
+		for x in self.getCatId(quality['identifier']):
+			categories+='&c' + str(x) + '=1'
+
+		searchurl = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['library']['year'])), categories)
 		data = self.getHTMLData(searchurl, opener = self.login_opener)
 		
 		
