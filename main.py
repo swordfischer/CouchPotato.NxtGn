@@ -44,7 +44,7 @@ class NxtGn(TorrentProvider, MovieProvider):
          categories+='&c' + str(x) + '=1'
 
       searchurl = self.urls['search'] % (tryUrlencode('%s %s' % (title.replace(':', ''), movie['info']['year'])), categories)
-      data = self.getHTMLData(searchurl).decode('utf8')
+      data = self.getHTMLData(searchurl).decode('latin-1')
       
       
       if data:
