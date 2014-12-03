@@ -139,7 +139,7 @@ class NxtGn(TorrentProvider, MovieProvider):
       try:
          # Find csrf for login
          data_login = self.getHTMLData(self.urls['login_page'])
-         bs = BeautifulSoup(data_login.decode('utf8'))
+         bs = BeautifulSoup(data_login.decode('latin-1'))
          csrfraw = bs.find('form', attrs = {'id': 'login'})['action']
          
          # Create 'login' in self.urls
