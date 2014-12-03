@@ -32,7 +32,7 @@ class NxtGn(TorrentProvider, MovieProvider):
    ]
 
 
-   http_time_between_calls = 1 #seconds
+   https_time_between_calls = 1 #seconds
 
    cat_backup_id = None
 
@@ -97,8 +97,8 @@ class NxtGn(TorrentProvider, MovieProvider):
                      'url': (self.urls['download'] % torrentId).encode('utf8'),
                      'detail_url': (self.urls['detail'] % torrentId).encode('utf8'),
                      'size': self.parseSize(result.find('div', attrs = {'id' : 'torrent-size'}).text),
-                     'seeders': tryInt(result.find('div', attrs = {'id' : 'torrent-seeders'})),
-                     'leechers': tryInt(result.find('div', attrs = {'id' : 'torrent-leechers'})),
+                     'seeders': tryInt(result.find('div', attrs = {'id' : 'torrent-seeders'}).text),
+                     'leechers': tryInt(result.find('div', attrs = {'id' : 'torrent-leechers'}).text),
                })               
 
          except:
