@@ -1,14 +1,23 @@
 NxtGn CouchPotato Provider
 ======================
 
-<h3>How-to install</h3>
-Make a folder named nxtgn at /couchpotato/core/providers/torrent/ and place the init.py and main.py file inside.
+How to install
+===========
+Make an folder named nxtgn in your custom_plugins folder which is is located within your config folder. From CouchPotato goto Settings->About->Directories (second folder is your config folder) for location. Place the init.py and main.py files inside the nxtgn folder.
 
-<h3>How-to use</h3>
-Once installed as above, go about activating the provider as you would with any other provider in CouchPotato.
 
-<h3>Thanks to</h3>
-<ul>
-  <li><a href="https://github.com/Xirg">Xirg</a></li>
-  <li><a href="https://github.com/TjaLfE">TjaLfe</a></li>
-</ul>
+How to use
+===========
+Restart CouchPotato. Then go to Settings->Searcher to configure just like any other provider. If nxtgn doesn't appear as an option, refresh your browser using CTRL + F5 as you may be seeing a cached version.
+
+
+Issues/Updates
+===========
+Go to github.com/swordfischer/CouchPotato.NxtGn
+
+
+Thanks to
+===========
+* [Xirg](https://github.com/Xirg)
+* [TjaLfe](https://github.com/TjaLfE)
+* [clinton.hall](https://couchpota.to/forum/viewtopic.php?f=17&t=4231)
