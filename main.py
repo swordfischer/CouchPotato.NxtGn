@@ -10,6 +10,7 @@ import traceback
 import cookielib
 import urllib2
 import time
+import re
 
 log = CPLog(__name__)
 
