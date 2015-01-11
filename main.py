@@ -68,10 +68,10 @@ class NxtGn(TorrentProvider, MovieProvider):
                log.info('%s entries found from nxtgn' % str(len(entries)))
                # Extracting results from entries
                for result in entries:
-                  
+
                   torrentId = (((result.find('div', attrs = {'id' :'torrent-download'})).find('a'))['href']).replace('download.php?id=','')
                   torrentName = ((result.find('div', attrs = {'id' :'torrent-udgivelse2-users'})).find('a'))['title']
-                  
+
                   # Name trimming
                   torrentName = torrentName.replace("3D.", "")
                   torrentName = torrentName.replace("DTS7.1.", "")
@@ -92,8 +92,8 @@ class NxtGn(TorrentProvider, MovieProvider):
 
                   torrentDescription = ((result.find('div', attrs = {'id' :'imdb-link'})).find('a'))['href']
                   torrentDescription = re.sub(r'\D*[^t{2}\d+]', '', torrentDescription)
-                  
-                     
+
+
                   results.append({
                      'id': torrentId,
                      'name': torrentName,
