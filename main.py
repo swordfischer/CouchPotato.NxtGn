@@ -91,8 +91,11 @@ class NxtGn(TorrentProvider, MovieProvider):
                   torrentName = torrentName.replace('Theatrical.','')
                   torrentName = torrentName.replace('Directors.Cut.','')
 
-                  torrentDescription = ((result.find('div', attrs = {'id' :'imdb-link'})).find('a'))['href']
-                  torrentDescription = re.sub(r'\D*[^t{2}\d+]', '', torrentDescription)
+                  try:
+                    torrentDescription = ((result.find('div', attrs = {'id' :'imdb-link'})).find('a'))['href']
+                    torrentDescription = re.sub(r'\D*[^t{2}\d+]', '', torrentDescription)
+                  except:
+                    torrentDescription = ''
 
 
                   results.append({
