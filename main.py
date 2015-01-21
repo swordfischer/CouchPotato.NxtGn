@@ -10,6 +10,7 @@ import traceback
 import cookielib
 import urllib2
 import time
+import re
 
 log = CPLog(__name__)
 
@@ -26,9 +27,9 @@ class NxtGn(TorrentProvider, MovieProvider):
    }
    
    cat_ids = [
-      ([9, 33, 38, 43, 47], ['720p', '1080p']),
+      ([9, 33, 38, 43, 47], ['720p', '1080p', 'brrip']),
       ([6, 16, 17, 25, 28], ['dvdr']),
-      ([5], ['cam', 'ts', 'dvdrip', 'tc', 'r5', 'scr', 'brrip']),
+      ([5], ['cam', 'ts', 'dvdrip', 'tc', 'r5', 'scr']),
    ]
 
 
@@ -68,10 +69,10 @@ class NxtGn(TorrentProvider, MovieProvider):
                log.info('%s entries found from nxtgn' % str(len(entries)))
                # Extracting results from entries
                for result in entries:
-                  
+
                   torrentId = (((result.find('div', attrs = {'id' :'torrent-download'})).find('a'))['href']).replace('download.php?id=','')
                   torrentName = ((result.find('div', attrs = {'id' :'torrent-udgivelse2-users'})).find('a'))['title']
-                  
+
                   # Name trimming
                   torrentName = torrentName.replace("3D.", "")
                   torrentName = torrentName.replace("DTS7.1.", "")
@@ -89,8 +90,14 @@ class NxtGn(TorrentProvider, MovieProvider):
                   torrentName = torrentName.replace('Unrated.','')
                   torrentName = torrentName.replace('Theatrical.','')
                   torrentName = torrentName.replace('Directors.Cut.','')
-                  
-                     
+
+                  try:
+                    torrentDescription = ((result.find('div', attrs = {'id' :'imdb-link'})).find('a'))['href']
+                    torrentDescription = re.sub(r'\D*[^t{2}\d+]', '', torrentDescription)
+                  except:
+                    torrentDescription = ''
+
+
                   results.append({
                      'id': torrentId,
                      'name': torrentName,
@@ -99,6 +106,7 @@ class NxtGn(TorrentProvider, MovieProvider):
                      'size': self.parseSize(result.find('div', attrs = {'id' : 'torrent-size'}).text),
                      'seeders': tryInt(result.find('div', attrs = {'id' : 'torrent-seeders'}).text),
                      'leechers': tryInt(result.find('div', attrs = {'id' : 'torrent-leechers'}).text),
+                     'description': torrentDescription,
                })               
 
          except:
