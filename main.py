@@ -18,12 +18,12 @@ log = CPLog(__name__)
 class NxtGn(TorrentProvider, MovieProvider):
 
    urls = {
-      'test' : 'https://nxtgn.org/',
-      'login_page' : 'https://nxtgn.org/login.php',
-      'login' : 'https://nxtgn.org/takelogin.php',
-      'detail' : 'https://nxtgn.org/details.php?id=%s',
-      'search' : 'https://nxtgn.org/browse.php?search=%s&cat=0&incldead=0&modes=%s',
-      'download' : 'https://nxtgn.org/download.php?id=%s',
+      'test' : 'https://nxgn.org/',
+      'login_page' : 'https://nxgn.org/login.php',
+      'login' : 'https://nxgn.org/takelogin.php',
+      'detail' : 'https://nxgn.org/details.php?id=%s',
+      'search' : 'https://nxgn.org/browse.php?search=%s&cat=0&incldead=0&modes=%s',
+      'download' : 'https://nxgn.org/download.php?id=%s',
    }
    
    cat_ids = [
@@ -55,7 +55,7 @@ class NxtGn(TorrentProvider, MovieProvider):
          try:
             resultsTable = html.find('div', attrs = {'id' : 'torrent-table-wrapper'})
             if not resultsTable:
-               log.info('no torrent table found from nxtgn')
+               log.info('no torrent table found from nxgn')
                return
             
             # Collecting entries
@@ -64,9 +64,9 @@ class NxtGn(TorrentProvider, MovieProvider):
             entries = entries_std + entries_sticky
             
             if not len(entries) > 0:
-               log.info('no entries found on nxtgn torrent table')
+               log.info('no entries found on nxgn torrent table')
             else:
-               log.info('%s entries found from nxtgn' % str(len(entries)))
+               log.info('%s entries found from nxgn' % str(len(entries)))
                # Extracting results from entries
                for result in entries:
 
